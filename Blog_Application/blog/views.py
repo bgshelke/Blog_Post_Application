@@ -4,7 +4,7 @@ from .models import User,Post
 # Create your views here.
 
 
-def post_view(request):
+def add_post(request):
     template_name = 'blog/post.html'
     form = PostFrom()
     if request.method == 'POST':
@@ -21,3 +21,12 @@ def home_view(request):
     all_posts = Post.objects.all().order_by('-posted_at')
     context={'all_posts':all_posts}
     return render(request,template_name,context)
+
+
+def blog_details(request,pk):
+    template_name = 'blog/blog_details.html'
+    blog_post =  Post.objects.get(id=pk)
+    context={'blog_post':blog_post}
+    return render(request,template_name,context)
+
+
